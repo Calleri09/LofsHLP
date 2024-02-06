@@ -22,19 +22,19 @@ public class Program {
 		System.out.println("Enter cliente data:");
 		
 		System.out.println("Name: ");
-		String NameClient = sc.nextLine();
+		String nameClient = sc.nextLine();
 		System.out.println("Email: ");
-		String EmailClient = sc.nextLine();
+		String emailClient = sc.nextLine();
 		System.out.println("Birth date (DD/MM/YYYY): ");
-		Date BirthDate = sdf.parse(sc.next());
+		Date birthDate = sdf.parse(sc.next());
 		
 		System.out.println("Enter order data:");
 		
 		System.out.print("Status: ");
-		String StatusOrder = sc.next();
+		String statusOrder = sc.next();
 		System.out.print("");
 		
-		Order order = new Order (new Date(), OrderStatus.valueOf(StatusOrder), new Client (NameClient, EmailClient, BirthDate));
+		Order order = new Order (new Date(), OrderStatus.valueOf(statusOrder), new Client (nameClient, emailClient, birthDate));
 		
 		System.out.println("How many items to this order? ");
 		int items = sc.nextInt();
@@ -42,24 +42,24 @@ public class Program {
 		for (int i = 1; i <= items; i++) {
 			System.out.println("Enter #" + i + " " + "Item data");
 			System.out.println("Product name: ");
-			String ProductName = sc.next();
+			String productName = sc.next();
 			System.out.println("Product price: ");
-			Double ProductPrice = sc.nextDouble();
+			Double productPrice = sc.nextDouble();
 			System.out.println("Quantity: ");
-			Integer Quantity = sc.nextInt();
-			OrderItem orderItem = new OrderItem (Quantity, ProductPrice, new Product(ProductName, ProductPrice));
+			Integer quantity = sc.nextInt();
+			OrderItem orderItem = new OrderItem (quantity, productPrice, new Product(productName, productPrice));
 			order.addItem(orderItem);
 		}
 		
 		System.out.println("ORDER SUMMARY: ");
-		System.out.println("Order moment: " + order.getMomento());
+		System.out.println("Order moment: " + sdf.format(order.getMomento()));
 		System.out.println("Order status: " + order.getStatus());
-		System.out.println("Client: " + NameClient + "(" + BirthDate + ")" + "-" + EmailClient);
+		System.out.println(order.getClient());
 		System.out.println("Order Items: ");
 		for (OrderItem c : order.getItem()) {
 			System.out.println(c);
 		}
-		System.out.println("Total Price: " + "$" + order.total());
+		System.out.printf("Total Price: " + "$ %.2f", order.total());
 		
 	}
 

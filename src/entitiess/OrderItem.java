@@ -1,10 +1,14 @@
 package entitiess;
 
+import java.text.DecimalFormat;
+
 public class OrderItem {
 
 	private Integer quantity;
 	private Double price;
 	private Product product;
+
+	DecimalFormat df = new DecimalFormat("#.00");
 
 	public OrderItem() {
 
@@ -41,8 +45,11 @@ public class OrderItem {
 	}
 
 	public Double subTotal() {
-		Double mul = quantity * price;
-		return mul;
+		return quantity * price;
 	}
 
+	@Override
+	public String toString() {
+		return "" + product.getName() + ", $" + df.format(product.getPrice()) + ", Quantity: " + quantity + ", Subtotal: $" + price;
+	}
 }
